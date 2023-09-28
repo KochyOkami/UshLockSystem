@@ -26,8 +26,8 @@ $keyholder = getUserById($lock['keyholder'])[0];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
     <link rel="shortcut icon" href="/includes/img/closed_lock.png" type="image/x-icon">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/locks.css">
+    <link rel="stylesheet" href="/public_html/locksystem/public_html/assets/css/style.css">
+    <link rel="stylesheet" href="/locksystem/public_html/assets/css/locks.css">
 </head>
 
 <body>
