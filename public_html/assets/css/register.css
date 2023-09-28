@@ -1,0 +1,121 @@
+/* Overall Page Styling */
+.box {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Style for the "eye" icon */
+.toggle-password {
+    position: relative;
+    cursor: pointer;
+    top: -30px;
+    color: black;
+    left: 250px;
+}
+
+/* Style for the password input field */
+.password-input-container {
+    position: relative;
+}
+
+/* Hide the password input field when the "eye" icon is clicked */
+#password[type="password"]+.toggle-password.active {
+    color: #007bff;
+    /* Change the icon color when active */
+}
+
+#password[type="text"]+.toggle-password {
+    color: #bababa;
+    /* Default icon color when not active */
+}
+
+/* Hide the password input field when the "eye" icon is clicked */
+#password2[type="password"]+.toggle-password.active {
+    color: #007bff;
+    /* Change the icon color when active */
+}
+
+#password2[type="text"]+.toggle-password {
+    color: #bababa;
+    /* Default icon color when not active */
+}
+
+#password,
+#password2 {
+    width: 100%;
+    padding: 10px;
+    border: 4px solid #ccc; /* Increased border width */
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Sign In Form Styling */
+.container {
+    background-color: rgb(39, 39, 41);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 80%;
+    text-align: center;
+    flex-direction: column;
+}
+
+.container h1 {
+    color: white;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: white;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 3px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+button[type="submit"] {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #8715e4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    scale: 1.1;
+}
+
+/* Style for disabled button */
+button[type="submit"]:disabled {
+    background-color: #6c757d; /* Your darker color for disabled button */
+    color: #ccc; /* Text color for disabled button */
+}

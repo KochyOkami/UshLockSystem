@@ -1,0 +1,106 @@
+/* Overall Page Styling */
+body {
+    background-color: #333; /* Dark background color */
+    color: white; /* White text */
+    font-family: Arial, sans-serif; /* Choose an appropriate font */
+}
+a:hover {
+    transform: scale(1.1); /* Scale the button by 10% on hover */
+}
+
+a.lock{
+    text-decoration:none;
+    color:white;
+}
+
+/* Header Styling */
+header {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style the "Sign In" button */
+.sign-in-button {
+    background-color: #8715e4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Style the "Login" button */
+.login-button {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.login-button:hover{
+    background-color: rgb(39, 39, 41);
+}
+
+/* Overall Page Styling */
+.box {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: none;
+    margin-top: 5em;
+}
+
+/* Sign In Form Styling */
+.container {
+    background-color: rgb(39, 39, 41);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 30px;
+    max-width: 80%;
+    width: 100%;
+    text-align: center;
+    flex-direction: column;
+}
+
+
+/* Left side: Image centered within darker background */
+.left-side {
+    flex: 1;
+    background-color: #1f1f22; /* Darker background color */
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    border-radius: 20px;
+}
+
+.left-side img {
+    max-width: 70%;
+    height: auto;
+    display: block; /* Make the image a block-level element */
+    margin: 0 auto; /* Center horizontally within the left side */
+}
+
+/* Right side: Title and description text */
+.right-side {
+    flex: 1;
+    padding: 70px;
+}
+
+.right-side h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.right-side p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+

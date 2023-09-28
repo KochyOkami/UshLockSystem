@@ -1,0 +1,68 @@
+.locks {
+    background-color: #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+}
+
+a.lock:hover {
+    transform: scale(1.02); /* Scale the button by 10% on hover */
+}
+a:hover{
+    transform: scale(1.1);
+}
+
+.lock_text {
+    width: 100%;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+}
+
+.lock {
+    background-color: rgb(39, 39, 41);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    margin: 5px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.p_text {
+    position: relative;
+    top: 0.5em;
+}
+
+
+/* Style for the main block */
+.main-block {
+    position: relative; /* Allows absolute positioning for inner elements */
+}
+
+/* Style for the text block */
+.text-block {
+    text-align: center;
+}
+
+/* Style for the button block */
+.button-block {
+    position: absolute;
+    top: 50%; /* Vertically center the button */
+    right: 10px; /* Adjust the right distance as needed */
+    transform: translateY(-50%); /* Center vertically */
+}
+
+/* Style for the button */
+.my-button {
+    background-color: #007bff; /* Blue color, you can change it */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}

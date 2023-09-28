@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Disable directory browsing
+Options -Indexes
+
+# Set custom error pages
+ErrorDocument 404 /error.php?code=404
+ErrorDocument 403 /error.php?code=403
