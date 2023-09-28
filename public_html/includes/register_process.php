@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if passwords match
     if ($password !== $password2) {
         $_SESSION['error_message'] = "Passwords do not match";
-        header("Location: /register"); // Redirect back to the registration form
+        header("Location: ../register"); // Redirect back to the registration form
         exit;
     }
 

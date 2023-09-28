@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check the result of registration
     if ($result === "Login successful") {
         // Redirect to the profile page on success
-        header("Location: /profile");
+        header("Location: ../profile");
         $_SESSION['error_message'] = "";
         exit;
     } else {
