@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label for="username">Nom d'utilisateur
                         <span id="username-status" style="font-style: italic; color:red;"></span></label>
-                    <input type="text" id="username" name="username" required>
+                    <input style="margin-bottom:21px;" type="text" id="username" name="username" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
