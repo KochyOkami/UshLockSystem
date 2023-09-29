@@ -133,3 +133,115 @@ function getLocks($user_id)
 
     return $stmt->fetchAll();
 }
+function getKeyholderLocks($user_id)
+{
+    global $db; // Access the global database connection
+    
+    $query = "SELECT * FROM Locks WHERE keyholder = :id OR wearer = :id2";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':id', $user_id, PDO::PARAM_STR);
+    $stmt->bindParam(':id2', $user_id, PDO::PARAM_STR);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
+function updateLockStatus($lockId, $newStatus)
+{
+    global $db; // Access the global database connection
+
+    // Check if the new status is a valid boolean value (true or false)
+    if (!is_bool($newStatus)) {
+        return "Invalid status value";
+    }
+
+    // Update the lock status in the database
+    $query = "UPDATE Locks SET status = :status WHERE id = :lockId";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':status', $newStatus, PDO::PARAM_BOOL);
+    $stmt->bindParam(':lockId', $lockId, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return "Failed to update lock status";
+    }
+}
+
+function setLockEndTime($lockId, $newTime)
+{
+    global $db; // Access the global database connection
+
+    // Update the lock's timer_end in the database
+    $query = "UPDATE Locks SET timer_end = :newTimerEnd WHERE id = :lockId";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':newTimerEnd', $newTime, PDO::PARAM_STR);
+    $stmt->bindParam(':lockId', $lockId, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return "Failed to update lock timer_end";
+    }
+}
+
+function setLockStartTime($lockId, $newTime)
+{
+    global $db; // Access the global database connection
+
+    // Update the lock's timer_end in the database
+    $query = "UPDATE Locks SET timer_start = :newTimerEnd WHERE id = :lockId";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':newTimerEnd', $newTime, PDO::PARAM_STR);
+    $stmt->bindParam(':lockId', $lockId, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return "Failed to update lock timer_start";
+    }
+}
+function setPingLock($lockId, $pingTime)
+{
+    global $db; // Access the global database connection
+
+    // Update the lock's timer_end in the database
+    $query = "UPDATE Locks SET ping = :pingTime WHERE id = :lockId";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':pingTime', $pingTime, PDO::PARAM_STR);
+    $stmt->bindParam(':lockId', $lockId, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        return "Failed to update lock pingTime";
+    }
+}
+
+// Function to fetch a list of all registered users
+function getAllUsers()
+{
+    global $db; // Access the global database connection
+
+    $query = "SELECT id, username FROM Users";
+    $stmt = $db->prepare($query);
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
+
+// Function to assign a user as the keyholder for a lock
+function assignKeyholder($lock_id, $username)
+{
+    global $db; // Access the global database connection
+
+    // Check if the lock exists and is owned by the current user (you can add this check if needed)
+
+    // Update the lock's keyholder field with the selected user's ID
+    $query = "UPDATE Locks SET keyholder = :username WHERE id = :lock_id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->bindParam(':lock_id', $lock_id, PDO::PARAM_INT);
+
+    return $stmt->execute();
+}

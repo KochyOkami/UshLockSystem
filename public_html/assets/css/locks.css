@@ -129,9 +129,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .time_box input {
-    font-size: 20px; /* Set font size */
-    color: #fffefe; /* Text color */
-    display: block; /* Make labels block elements */
+    font-size: 20px;
+    /* Set font size */
+    color: #fffefe;
+    /* Text color */
+    display: block;
+    /* Make labels block elements */
 
 }
 
@@ -144,4 +147,34 @@ input[type="number"]::-webkit-inner-spin-button {
     text-decoration: none;
     width: 20%;
     margin: 5px;
+}
+
+.dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+    animation: blink 0.7s ease-in-out infinite alternate;
+    transition: background-color 0.3s ease-in-out;
+    margin: 4px;
+    margin-left: 20px;
+}
+
+.dot.green {
+    background-color: green;
+}
+
+.dot.red {
+    background-color: red;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0.2;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

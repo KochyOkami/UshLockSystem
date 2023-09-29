@@ -23,9 +23,9 @@ $user = getUser($username);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link rel="shortcut icon" href="/includes/img/closed_lock.png" type="image/x-icon">
-    <link rel="stylesheet" href="/locksystem/public_html/assets/css/style.css">
-    <link rel="stylesheet" href="/locksystem/public_html/assets/css/profile.css">
+    <link rel="shortcut icon" href="includes/img/closed_lock.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/profile.css">
 </head>
 
 
@@ -45,10 +45,10 @@ $user = getUser($username);
                 <div class="locks">
                     <div class="main-block">
                         <div class="text-block">
-                            <h2>Tous les locks</h2>
+                            <h2>Tous mes locks</h2>
                         </div>
                         <div class="button-block">
-                            <a class="sign-in-button" href="create_lock">Créer</a>
+                            <!--<a class="sign-in-button" href="create_lock">Créer</a>-->
                         </div>
                     </div>
 
@@ -56,12 +56,14 @@ $user = getUser($username);
                         <p>Durée</p>
                         <p>Depuis</p>
                         <p>Status</p>
+                        <p>Porteur</p>
                         <p>Keyholder</p>
                     </div>
                     <?php
                     $time = date("Y-m-d H:i:s");
                     //get all lock available:
-                    $locks = getLocks($user['id']);
+                    $locks = getKeyholderLocks($user['id']);
+                    
                     foreach ($locks as $key => $value) {
 
                         echo "<a class=\"lock\" href=\"/lock?id={$value['id']}\">";
@@ -79,15 +81,19 @@ $user = getUser($username);
                         } else {
                             echo "<p class=\"p_text\">" . date_diff(date_create("now"), date_create($value['timer_end']))->format("%dj %hh%M") . "</p>";
                         }
+                        $wearer = getUserById($value['wearer'])[0];
+                        echo "<p class=\"p_text\">" .($wearer['username'] == $user['username'] ? "Moi": $wearer['username']). "</p>";
+
                         $keyholder = getUserById($value['keyholder'])[0];
-                        echo "<p class=\"p_text\">" . $keyholder['username'] . "</p>";
+                        echo "<p class=\"p_text\">" .($keyholder['username'] == $user['username'] ? "Moi": $keyholder['username']) . "</p>";
                         echo "</a>";
                     }
 
                     ?>
                 </div>
+                
             </div>
-            <a href="logout.php" class='login-button'>Se déconnecter</a>
+            <a href="includes/logout.php" class='login-button'>Se déconnecter</a>
         </div>
     </div>
 </body>

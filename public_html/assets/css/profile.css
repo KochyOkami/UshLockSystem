@@ -19,7 +19,7 @@ a:hover{
     width: 100%;
     text-align: center;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(5, 1fr); 
 }
 
 .lock {
@@ -30,7 +30,7 @@ a:hover{
     text-align: center;
     margin: 5px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 10px;
 }
 

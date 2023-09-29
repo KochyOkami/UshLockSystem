@@ -1,0 +1,13 @@
+#userContainer {
+    display: flex;
+    width: 100px;
+    justify-content: space-around;
+    flex-direction: column;
+    margin: 0px 20%;
+}
+
+
+
+.container {
+    width: 50%;
+}

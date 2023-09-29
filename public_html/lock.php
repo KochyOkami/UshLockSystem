@@ -17,6 +17,9 @@ $lock = getLocksById($_GET['id'])[0];
 $user = getUserById($lock['wearer'])[0];
 $keyholder = getUserById($lock['keyholder'])[0];
 
+echo $user['username'];
+echo $keyholder['username'];
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -26,8 +29,8 @@ $keyholder = getUserById($lock['keyholder'])[0];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
     <link rel="shortcut icon" href="/includes/img/closed_lock.png" type="image/x-icon">
-    <link rel="stylesheet" href="/public_html/locksystem/public_html/assets/css/style.css">
-    <link rel="stylesheet" href="/locksystem/public_html/assets/css/locks.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/locks.css">
 </head>
 
 <body>
@@ -45,7 +48,8 @@ $keyholder = getUserById($lock['keyholder'])[0];
                     echo "<span><img src=\"img/opened_lock.png\" alt=\"lock\" style=\"width:30px;\" /></span>";
                 } ?>
 
-                <span style="font-size: 35px;">Lock n° <?php echo $lock['id']; ?></span>
+                <span style="font-size: 35px;">Lock n° <?php echo $lock['id']; ?><div id="dot" class="dot"></div>
+                </span>
             </div>
             <div style="display:flex;">
                 <div class="locks">
@@ -54,35 +58,35 @@ $keyholder = getUserById($lock['keyholder'])[0];
                     <div style="text-align:left;">
                         <p>Porteur: <?php echo $user['username']; ?></p>
                         <p>Keyholder: <?php echo $keyholder['username']; ?></p>
-                        <?php echo "<p class=\"p_text\">Temps: " . date_diff(date_create("now"), date_create($lock['timer_start']))->format("%dj %hh%M") . "</p>";
-                        if (date("Y-m-d H:i:s") > $lock["timer_end"]) {
-                            echo "<p class=\"p_text\">Temps restant: Fini</p>";
-                        } else {
-                            echo "<p class=\"p_text\">Temps restant: " . date_diff(date_create("now"), date_create($lock['timer_end']))->format("%dj %hh%M") . "</p>";
-                        }
+                        <p class="p_text">Depuis: <span id='temps'><span></p>
+                        <p class="p_text">Temps restant: <span id='temps-restant'><span></p>
+                        <p>Status: <?php echo $lock['status'] ? "Verrouillé" : "Déverrouillé"; ?></p>
+                        <?php
 
-                        echo "<p class=\"p_text\">Status: " . ($lock['status'] ? "Verrouillé" : "Déverrouillé") . "</p>";
-                        if ($user["username"] == $keyholder["username"]) {
-                            echo "ap";
-                        } else {
-                            echo "<a class='submit' href='includes/unlock?id=" . $lock["id"] . "'>Déverrouiller</a>";
+                        if ($username == $keyholder["username"]) {
+                            if ($lock['status']) {
+                                echo "<a class='submit' href='includes/unlock_device?id=" . $lock["id"] . "'>Déverrouiller</a>";
+                            } else {
+                                echo "<a class='submit' href='includes/lock_device?id=" . $lock["id"] . "'>Verrouiller</a>";
+                            }
+                            echo "<a class='submit' href='give_key?id=" . $lock["id"] . "'>Ceder la clé</a>";
+                            
+
                         }
                         ?>
                     </div>
 
                 </div>
                 <?php
-                if ($user["username"] == $keyholder["username"]) {
-                    echo "ap";
-                } else {
+                if ($username == $keyholder["username"]) {
                     echo "
                     <div class=\"locks\">
                         
-                        <form method='POST' action='includes/time_manager'>
+                        <form method='POST' action='includes/time_manager?id=" . $lock['id'] . "'>
                             <h2>Modifier</h2>
                             <div class=\"time_manager_box\">
                                 <!-- Days -->
-                                <div class='time_box'>
+                                <div class='time_box'>  
                                     <label for='days'>Days:</label>
                                     <button type='button' class='addTime'>+</button>
                                     <input type='number' id='days' name='days' min='0' value='0'>
@@ -105,8 +109,9 @@ $keyholder = getUserById($lock['keyholder'])[0];
                                     <button type='button' class='removeTime'>-</button>
                                 </div>
                             </div>
-                            <input class='submit' type='submit' value='Ajouter'>
-                            <input class='submit' type='submit' value='Supprimer'>
+                            <input class='submit' type='submit' name='action' value='Ajouter'>
+                            <input class='submit' type='submit' name='action' value='Supprimer'>
+                            <input class='submit' type='submit' name='action' value='Set'>
                         </form>
                     </div>
                     <script>
@@ -153,5 +158,75 @@ $keyholder = getUserById($lock['keyholder'])[0];
     </div>
     </div>
 </body>
+<script>
+    function updateTempsRestant() {
+        const tempsRestantElement = document.getElementById('temps-restant');
+        const now = new Date();
+        const timerEnd = new Date('<?php echo $lock["timer_end"]; ?>');
+
+        if (now < timerEnd) {
+            const diff = Math.abs(timerEnd - now) / 1000; // Time difference in seconds
+            const days = Math.floor(diff / 86400);
+            const hours = Math.floor((diff % 86400) / 3600);
+            const minutes = Math.floor((diff % 3600) / 60);
+            const seconds = Math.floor(diff % 60);
+
+            tempsRestantElement.textContent = `${days}j ${hours}h ${minutes}m ${seconds}s`;
+        } else {
+            tempsRestantElement.textContent = "Fini";
+        }
+    }
+
+    // Call the update function immediately
+    updateTempsRestant();
+
+    // Set an interval to update Temps Restant every second (adjust as needed)
+    setInterval(updateTempsRestant, 1000);
+
+
+    function updateTemps() {
+        const tempsElement = document.getElementById('temps');
+        const now = new Date();
+        const timerStart = new Date('<?php echo $lock["timer_start"]; ?>');
+
+        const diff = Math.abs(now - timerStart) / 1000; // Time difference in seconds
+        const days = Math.floor(diff / 86400);
+        const hours = Math.floor((diff % 86400) / 3600);
+        const minutes = Math.floor((diff % 3600) / 60);
+
+        tempsElement.textContent = `${days}j ${hours}h ${minutes}m`;
+    }
+
+    // Call the update function immediately
+    updateTemps();
+
+    // Set an interval to update Temps every minute (adjust as needed)
+    setInterval(updateTemps, 60000); // 60000 milliseconds = 1 minute
+    const dotElement = document.getElementById("dot");
+
+    function updateDotColor() {
+        const currentTime = new Date();
+        const pingTime = new Date("<?php echo $lock['ping']; ?>"); // Assuming $lock['ping'] contains the ping timestamp
+
+        // Calculate the time difference in seconds
+        const timeDifferenceInSeconds = Math.abs((currentTime - pingTime) / 1000);
+
+        // Check if the time difference is less than 10 seconds
+        if (timeDifferenceInSeconds < 20) {
+            // Set the dot's background color to red
+            dotElement.style.backgroundColor = "green";
+        } else {
+            // Set the dot's background color to green
+            dotElement.style.backgroundColor = "red";
+        }
+
+        // Schedule the next update (e.g., every second)
+        setTimeout(updateDotColor, 1000);
+    }
+
+    // Initial call to start updating the dot's color
+    updateDotColor();
+    // Update the dot's class based on the lock's status
+</script>
 
 </html>
