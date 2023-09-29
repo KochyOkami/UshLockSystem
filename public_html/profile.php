@@ -66,7 +66,7 @@ $user = getUser($username);
                     
                     foreach ($locks as $key => $value) {
 
-                        echo "<a class=\"lock\" href=\"/lock?id={$value['id']}\">";
+                        echo "<a class=\"lock\" href=\"lock?id={$value['id']}\">";
                         // for all locks:   
 
                         if ($time < $value['timer_end']) {
