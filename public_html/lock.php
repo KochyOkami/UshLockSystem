@@ -17,9 +17,6 @@ $lock = getLocksById($_GET['id'])[0];
 $user = getUserById($lock['wearer'])[0];
 $keyholder = getUserById($lock['keyholder'])[0];
 
-echo $user['username'];
-echo $keyholder['username'];
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -28,7 +25,7 @@ echo $keyholder['username'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link rel="shortcut icon" href="/includes/img/closed_lock.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/closed_lock.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/locks.css">
 </head>
@@ -61,19 +58,19 @@ echo $keyholder['username'];
                         <p class="p_text">Depuis: <span id='temps'><span></p>
                         <p class="p_text">Temps restant: <span id='temps-restant'><span></p>
                         <p>Status: <?php echo $lock['status'] ? "Verrouillé" : "Déverrouillé"; ?></p>
-                        <?php
+                        <div style="padding-bottom: 15px;">
+                            <?php
 
-                        if ($username == $keyholder["username"]) {
-                            if ($lock['status']) {
-                                echo "<a class='submit' href='includes/unlock_device?id=" . $lock["id"] . "'>Déverrouiller</a>";
-                            } else {
-                                echo "<a class='submit' href='includes/lock_device?id=" . $lock["id"] . "'>Verrouiller</a>";
+                            if ($username == $keyholder["username"]) {
+                                if ($lock['status']) {
+                                    echo "<a class='submit' href='includes/unlock_device?id=" . $lock["id"] . "'>Déverrouiller</a>";
+                                } else {
+                                    echo "<a class='submit' href='includes/lock_device?id=" . $lock["id"] . "'>Verrouiller</a>";
+                                }
+                                echo "<a class='submit' href='give_key?id=" . $lock["id"] . "'>Ceder la clé</a>";
                             }
-                            echo "<a class='submit' href='give_key?id=" . $lock["id"] . "'>Ceder la clé</a>";
-                            
-
-                        }
-                        ?>
+                            ?>
+                        </div>
                     </div>
 
                 </div>
@@ -205,7 +202,7 @@ echo $keyholder['username'];
     const dotElement = document.getElementById("dot");
 
     function updateDotColor() {
-        const currentTime = new Date();
+        const currentTime = new Date("<?php echo date('Y-m-d H:i:s') ?>");
         const pingTime = new Date("<?php echo $lock['ping']; ?>"); // Assuming $lock['ping'] contains the ping timestamp
 
         // Calculate the time difference in seconds

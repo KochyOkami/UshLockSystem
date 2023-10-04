@@ -23,7 +23,7 @@ if ($keyholder['username'] != $_SESSION['username']){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keyholder</title>
-    <link rel="shortcut icon" href="/includes/img/closed_lock.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/closed_lock.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/keyholder.css">
 </head>

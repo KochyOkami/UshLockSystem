@@ -23,7 +23,7 @@ $user = getUser($username);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <link rel="shortcut icon" href="includes/img/closed_lock.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/closed_lock.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/profile.css">
 </head>
@@ -37,7 +37,7 @@ $user = getUser($username);
     <div class="box">
         <h1>Profil de <?php echo $user['username']; ?></h1>
         <div class="container">
-            <div style="display: flex;width: 100%;">
+            <div style="display: flex;width: 100%;margin-bottom: 20px;">
 
                 <div class="detail" style="width: 50%;">
                     <p>Nom d'utilisateur : <?php echo $user['username']; ?></p>

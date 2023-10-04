@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to fetch the list of users from your database
     async function getAllUsers() {
         try {
-            const response = await fetch('../../api/get_users.php'); // Replace with your API endpoint
+            const response = await fetch('api/get_users.php'); // Replace with your API endpoint
             const data = await response.json();
             return data;
         } catch (error) {

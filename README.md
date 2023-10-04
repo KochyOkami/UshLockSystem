@@ -48,7 +48,7 @@ CREATE TABLE Images (
 
 INSERT INTO Users (username, password) VALUES ("Maitre", "a");
 
-INSERT INTO Locks (wearer, keyholder, timer_start, timer_end, ping) VALUES (1,2,NOW(), NOW(), NOW());
+INSERT INTO Locks (wearer, keyholder, timer_start, timer_end, ping) VALUES (1,1,NOW(), NOW(), NOW());
 
 errors:
 
