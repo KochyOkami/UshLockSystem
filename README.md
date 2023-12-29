@@ -57,3 +57,8 @@ errors:
 100 ->
 101 -> db errro
 102 -> registring password != password2
+
+
+sudo a2enmod rewrite
+sudo nano /etc/apache2/apache2.conf
+sudo service apache2 restart
